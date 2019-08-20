@@ -1,0 +1,63 @@
+{
+    //"workbench.colorTheme": "One Dark Pro",
+    "files.associations": {
+        "sstream": "cpp",
+        "fstream": "cpp",
+        "iostream": "cpp",
+        "ostream": "cpp"
+    },
+    "C_Cpp.configurationWarnings": "Disabled",
+
+
+    // "editor.tokenColorCustomizations": {
+    //     "entity.name.directive.restructuredtext": "#F1FA8C",
+    //     //"strings": "#FF0000",
+    //     "textMateRules": [
+    //         {
+    //             "scope": ["string.quoted.double",],
+    //             "settings": {
+    //                 "foreground": "#4a7da6"
+    //             },
+    //             "scope": "string.quoted.other.lt-gt.include",
+    //             "settings": {
+    //                 "foreground": "#ffffff"
+    //             },
+    //             "scope": "punctuation.definition.string.begin",
+    //             "settings": {
+    //                 "foreground": "#9575CD"
+    //             },
+    //             "scope": "meta.encoding",
+    //             "settings": {
+    //                 "foreground": "#4EC9B0"
+    //             },
+    //         }
+    //     ]
+    // },
+
+
+    // "workbench.colorCustomizations": {
+    //     "tab.unfocusedActiveBorder": "#fff0",
+    //     "activityBar.background": "#361f3f",
+    //     "titleBar.activeBackground": "#553263",
+    //     "titleBar.activeForeground": "#FDFCFD"
+    // },
+    // "editor.tokenColorCustomizations": {
+    //     "textMateRules": [
+
+    //         {
+    //             "scope": "comment",
+    //             "settings": {
+    //                 "foreground": "#4a7da6"
+    //             }
+    //         },
+    //         {
+    //             "scope": "entity.name.type",
+    //             "settings": {
+    //                 "foreground": "#4EC9B0"
+    //             }
+    //         },
+
+    //     ]
+    // }
+
+}

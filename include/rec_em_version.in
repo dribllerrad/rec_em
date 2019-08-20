@@ -1,0 +1,27 @@
+#pragma once
+
+namespace rec_em
+{
+
+#define PROJECT_NAME "@PROJECT_NAME@"
+#define @CAPITOLIZED_PROJECT_NAME@_VERSION "@PROJECT_VERSION@"
+#define MAJOR_VERSION @PROJECT_VERSION_MAJOR@
+#define MINOR_VERSION @PROJECT_VERSION_MINOR@
+#define PATCH_VERSION @PROJECT_VERSION_PATCH@
+#define BUILD_NUMBER @PROJECT_VERSION_TWEAK@
+#define GIT_COMMIT "@GIT_COMMIT@"
+
+    struct Version
+    {
+        constexpr static auto project_name = PROJECT_NAME;
+        constexpr static auto project_version = @CAPITOLIZED_PROJECT_NAME@_VERSION;
+        constexpr static int major_version = MAJOR_VERSION;
+        constexpr static int minor_version = MINOR_VERSION;
+        constexpr static int patch_version = PATCH_VERSION;
+        constexpr static int build_number = BUILD_NUMBER;
+        constexpr static auto git_commit = GIT_COMMIT;
+    };
+
+    inline constexpr Version version;
+
+} // namespace rec_em
