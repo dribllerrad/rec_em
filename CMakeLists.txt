@@ -54,7 +54,7 @@ set(PROJECT_VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT
 set(CAPITOLIZED_PROJECT_NAME REC_EM)
 
 set(VERSION_INPUT ${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}_version.in)
-set(VERSION_HEADER ${generated_header_dir}/${PROJECT_NAME}_version.h)
+set(VERSION_HEADER ${generated_header_dir}/${PROJECT_NAME}_version.hpp)
 
 configure_file(
     ${VERSION_INPUT}
