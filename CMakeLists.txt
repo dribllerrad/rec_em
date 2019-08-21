@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.0.0)
 
-project(rec_em)
+project(rec_em LANGUAGES CXX)
 
-set(PROJECT_VERSION_MAJOR 0)
-set(PROJECT_VERSION_MINOR 1)
+set(PROJECT_VERSION_MAJOR 1)
+set(PROJECT_VERSION_MINOR 0)
 set(PROJECT_VERSION_PATCH 0)
 
 
@@ -44,6 +44,7 @@ if(hasParent)
   set(generated_header_dir ${CMAKE_BINARY_DIR}/generated PARENT_SCOPE)
 endif()
 
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/BUILD_NUMBER)
 set(build_file ${CMAKE_CURRENT_SOURCE_DIR}/BUILD_NUMBER)
 file(READ ${build_file} project_build_number)
 set(PROJECT_VERSION_TWEAK ${project_build_number}) # CACHE STRING "Variable to set project build number")
@@ -58,8 +59,7 @@ set(VERSION_HEADER ${generated_header_dir}/${PROJECT_NAME}_version.h)
 configure_file(
     ${VERSION_INPUT}
     ${VERSION_HEADER}
-  #${CMAKE_CURRENT_SOURCE_DIR}/include/version.in
-  #${CMAKE_BINARY_DIR}/generated/version.h
+
 )
 ####################################################################
 
@@ -70,14 +70,25 @@ add_executable(${PROJECT_NAME} src/${PROJECT_NAME}.cpp)
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${generated_header_dir})
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
-#target_link_libraries(${PROJECT_NAME} stdc++fs)
 
+# Despite supporting c++17, some compilers still need the extra
+# filesystem library linked in (-lstdc++fs).  Specifically
+# gcc 8.x (gcc =< 7.x does not support c++17 and gcc >= 9.x has the
+# filesystem library included in the standard.
+# It is unnecessary in Clang 8.0 or greater.
+# It is unnecessary with MSVC2017 or greater.
 if(${CMAKE_CXX_COMPILER_ID} STREQUAL Clang)
-    message("Found Clang!!!")
+    message("Found Clang Compiler ...")
+    if(${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS 8)
+        message(
+            FATAL_ERROR
+            "\n\nClang is out of date...\n
+            Update Clang to version 8.0 or greater")
+    endif()
 endif()
 
 if(${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)
-    message("Found GNU!!!")
+    message("Found GNU Compiler (gcc)...")
     if(${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS 9)
         message("\n\nGNU is old!!!\n\n")
         message("\nAdding filesystem library\n")
@@ -85,12 +96,9 @@ if(${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)
     endif()
 endif()
 
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+#TODO Add check for MSVC compiler.
 
-#if(LINUX)
-#    message("\nAdding filesystem library\n")
-#    target_link_libraries(${PROJECT_NAME} stdc++fs)
-#endif(LINUX)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 ####################################################################
 
 
@@ -103,15 +111,16 @@ add_custom_command(
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 ####################################################################
 
+####################################################################
+## For Debugging System Variables
+# cmake_host_system_information(RESULT os_name QUERY OS_NAME)
+# message("OS name detected: ${os_name}")
+# if(${os_name} STREQUAL Linux)
 
-cmake_host_system_information(RESULT os_name QUERY OS_NAME)
-message("OS name detected: ${os_name}")
-if(${os_name} STREQUAL Linux)
+#     message("\n\n...if works...\n\n")
+#     message("Cmake host system name: ${CMAKE_HOST_SYSTEM_NAME}")
+#     message("Compiler ID detected: ${CMAKE_CXX_COMPILER_ID}")
+#     message("Compiler version: ${CMAKE_CXX_COMPILER_VERSION}")
+#     message("CXX_STANDARD: ${CXX_STANDARD}\n\n")
 
-    message("\n\n...if works...\n\n")
-    message("Cmake host system name: ${CMAKE_HOST_SYSTEM_NAME}")
-    message("Compiler ID detected: ${CMAKE_CXX_COMPILER_ID}")
-    message("Compiler version: ${CMAKE_CXX_COMPILER_VERSION}")
-    message("CXX_STANDARD: ${CXX_STANDARD}\n\n")
-
-endif()
+# endif()

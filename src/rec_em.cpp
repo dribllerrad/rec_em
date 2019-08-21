@@ -50,9 +50,12 @@ void print_version()
 {
 	std::cout << "\n"
 			  << rec_em::version.project_name << "\n\n"
-			  << "Version: " << rec_em::version.major_version << "." << rec_em::version.minor_version << "." << rec_em::version.patch_version << " Build: " << rec_em::version.build_number << " [" << rec_em::version.git_commit << "]\n\n"
-																																																									 "Version (alt): "
-			  << rec_em::version.project_name << " - " << rec_em::version.project_version << " [" << rec_em::version.git_commit << "]\n\n";
+			  << "Version: " << rec_em::version.major_version << "."
+			  << rec_em::version.minor_version << "."
+			  << rec_em::version.patch_version << "\n"
+			  << "Build: " << rec_em::version.build_number << "\n"
+			  << "git commit: [" << rec_em::version.git_commit << "]\n\n";
+
 }
 
 void print_help()
@@ -219,8 +222,6 @@ header_parameters get_arguments(int argc, char **argv)
 		parameters.header_filename = defaults + ".hpp";
 	}
 
-	//remove_hyphen(parameters);
-
 	return parameters;
 }
 
@@ -243,7 +244,7 @@ void binary_to_char_array(const std::string &input_file_name, const std::string 
 
 	std::string file_extension;
 
-	if(input_file_path.has_extension())
+	if (input_file_path.has_extension())
 	{
 		file_extension = input_file_path.extension();
 
@@ -292,7 +293,6 @@ void create_header(const header_parameters &parameters)
 		input_file_name = static_cast<std::filesystem::path>(parameters.output_directory / parameters.header_filename);
 	}
 
-
 	std::cout << "Generating " << input_file_name.generic_string() << "\n";
 	std::ofstream stream{input_file_name};
 	if (stream)
@@ -337,13 +337,6 @@ void create_header(const header_parameters &parameters)
 
 int main(int argc, char **argv)
 {
-#ifndef NDEBUG
-	std::cout << "Working Directory: " << std::filesystem::current_path() << "\n";
-	std::cout << "Pause for debugger.\nPress any key to continue...\n";
-	std::cin.get();
-
-#endif // NDEBUG
-
 	try
 	{
 		const auto parameters = get_arguments(argc, argv);
@@ -363,12 +356,6 @@ int main(int argc, char **argv)
 		std::cerr << "Error: " << err.what() << std::endl;
 		return 1;
 	}
-
-#ifndef NDEBUG
-	std::cout << "\nPress any key to exit...\n";
-	std::cin.get();
-
-#endif // NDEBUG
 
 	return 0;
 }
