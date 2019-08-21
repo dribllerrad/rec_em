@@ -46,7 +46,7 @@ endif()
 
 set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/BUILD_NUMBER)
 set(build_file ${CMAKE_CURRENT_SOURCE_DIR}/BUILD_NUMBER)
-file(READ ${build_file} project_build_number)
+file(STRINGS ${build_file} project_build_number LIMIT_COUNT 1)
 set(PROJECT_VERSION_TWEAK ${project_build_number}) # CACHE STRING "Variable to set project build number")
 
 set(PROJECT_VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}.${PROJECT_VERSION_TWEAK}")
