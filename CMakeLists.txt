@@ -10,8 +10,7 @@ set(PROJECT_VERSION_PATCH 0)
 
 ####################################################################
 # Versioning
-# set(MAJOR_VERSION ${PROJECT_VERSION_MAJOR})
-# set(MINOR_VERSION ${PROJECT_VERSION_MINOR})
+
 
 if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/.git)
     find_package(Git)
@@ -42,6 +41,9 @@ if(hasParent)
   header directory to parent project.\n")
   set(CMAKE_BUILD_TYPE Release)
   set(generated_header_dir ${CMAKE_BINARY_DIR}/generated PARENT_SCOPE)
+  add_library(rec_em_interface INTERFACE)
+  add_library(rec_em::rec_em ALIAS rec_em_interface)
+  target_include_directories(rec_em_interface INTERFACE ${generated_header_dir})
 endif()
 
 set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/BUILD_NUMBER)
@@ -71,12 +73,19 @@ add_executable(${PROJECT_NAME} src/${PROJECT_NAME}.cpp)
 target_include_directories(${PROJECT_NAME} PUBLIC ${generated_header_dir})
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
 
-# Despite supporting c++17, some compilers still need the extra
-# filesystem library linked in (-lstdc++fs).  Specifically
-# gcc 8.x (gcc =< 7.x does not support c++17 and gcc >= 9.x has the
-# filesystem library included in the standard.
-# It is unnecessary in Clang 8.0 or greater.
-# It is unnecessary with MSVC2017 or greater.
+
+#[=======================================================================[
+Note about compiler support
+********************************************************************
+Despite supporting c++17, some compilers still need the extra
+filesystem library linked in (-lstdc++fs).  Specifically this is for
+gcc 8.x.  Gcc =< 7.x does not support c++17 and gcc >= 9.x has the
+filesystem library included in the standard.
+This fix is not necessary in Clang >= 8.0 and MSVC >= 2017.
+********************************************************************
+#]=======================================================================]
+
+
 if(${CMAKE_CXX_COMPILER_ID} STREQUAL Clang)
     message("Found Clang Compiler ...")
     if(${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS 8)

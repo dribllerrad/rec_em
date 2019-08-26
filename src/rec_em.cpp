@@ -21,7 +21,7 @@
  *  - Darrell Bird (bird.darrell@gmail.com)
  */
 
-#include "rec_em_version.h"
+#include "rec_em_version.hpp"
 #include <iostream>
 #include <vector>
 #include <string>
@@ -55,7 +55,6 @@ void print_version()
 			  << rec_em::version.patch_version << "\n"
 			  << "Build: " << rec_em::version.build_number << "\n"
 			  << "git commit: [" << rec_em::version.git_commit << "]\n\n";
-
 }
 
 void print_help()
@@ -337,6 +336,11 @@ void create_header(const header_parameters &parameters)
 
 int main(int argc, char **argv)
 {
+
+#ifndef NDEBUG
+	std::cout << "*** DEBUG BUILD ***" << std::endl;
+#endif
+
 	try
 	{
 		const auto parameters = get_arguments(argc, argv);
