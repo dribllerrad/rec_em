@@ -84,8 +84,8 @@ target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
 Note about compiler support
 ********************************************************************
 Despite supporting c++17, some compilers still need the extra
-filesystem library linked in (-lstdc++fs).  Specifically this is for
-gcc 8.x.  Gcc =< 7.x does not support c++17 and gcc >= 9.x has the
+filesystem library linked in (-lstdc++fs).  Specifically, this applies
+to gcc 8.x.  Gcc =< 7.x does not support c++17 and gcc >= 9.x has the
 filesystem library included in the standard.
 This fix is not necessary in Clang >= 8.0 and MSVC >= 2017.
 ********************************************************************
