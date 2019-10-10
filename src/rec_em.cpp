@@ -77,7 +77,7 @@ void print_help()
 
 
         OPTIONS:
-            -o, --option
+            -o, --output
 			    NAME : Output filename for generated header. The default is 'rec_em'.
             -d, --directory
 			    PATH : Path to write the generated header. Path will be recursively

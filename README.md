@@ -14,19 +14,19 @@ rec_em INPUT [OPTIONS]
 
 - OPTIONS
 
-  -o, --option
+  -o, --output
   NAME : Output filename for generated header. The default is 'rec_em'.
-  
+
   -d, --directory
   PATH : Path to write the generated header. Path will be recursively
   created if it doesn't exist.
-  
+
   -n, --namespace
   NAME : Namespace to be used in the generated header.
-  
+
   -h, --help
   : Prints this help message.
-  
+
   -v, --version
   : Print version.
 
