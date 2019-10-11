@@ -21,7 +21,12 @@
  *  - Darrell Bird (bird.darrell@gmail.com)
  */
 
+#if __has_include(<rec_em_version.hpp>)
 #include "rec_em_version.hpp"
+#else
+#include <rec_em_version_default.hpp>
+#endif
+
 #include <iostream>
 #include <vector>
 #include <string>

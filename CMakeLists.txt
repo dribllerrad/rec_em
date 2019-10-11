@@ -76,7 +76,7 @@ configure_file(
 # Build executable
 add_executable(${PROJECT_NAME} src/${PROJECT_NAME}.cpp)
 
-target_include_directories(${PROJECT_NAME} PUBLIC ${generated_header_dir})
+target_include_directories(${PROJECT_NAME} PUBLIC ${generated_header_dir} include)
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
 
 
