@@ -42,9 +42,10 @@ set(generated_header_dir ${CMAKE_BINARY_DIR}/generated)
 # source files.
 get_directory_property(hasParent PARENT_DIRECTORY)
 if(hasParent)
-  message(STATUS "\n\n rec_em Message: Has a parent scope.\n
-  Setting rec_em build type to Release and exposing\n
-  header directory to parent project.\n\n")
+  message(STATUS "\n\n
+          rec_em Message: Has a parent scope.\n
+          Setting rec_em build type to Release and exposing\n
+          header directory to parent project.\n\n")
   set(CMAKE_BUILD_TYPE Release)
   set(generated_header_dir ${CMAKE_BINARY_DIR}/generated PARENT_SCOPE)
   add_library(rec_em_interface INTERFACE)
