@@ -35,7 +35,7 @@
 #include <cassert>
 #include <filesystem>
 #include <algorithm>
-//#include "rec_em_version.h"eee
+
 
 struct header_parameters
 {
