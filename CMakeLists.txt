@@ -47,13 +47,6 @@ install(TARGETS ${EXE_TARGET_NAME}
         EXPORT  ${PROJECT_NAME}
         DESTINATION bin)
 
-message(STATUS
-        "\n\n
-        CMAKE_BINARY_DIR = ${CMAKE_BINARY_DIR}
-        CMAKE_INSTALL_BINDIR = ${CMAKE_INSTALL_BINDIR}
-        CMAKE_RUNTIME_OUTPUT_DIRECTORY = ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
-        \n\n")
-
 
 ####################################################################
 # Versioning
