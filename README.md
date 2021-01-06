@@ -1,4 +1,4 @@
-# edr2hpp
+# rec_em (Resource Embedded)
 
 Creates a c++ header from an input file as an unsigned char array which can be used as an embedded resource in another binary. The unsigned char array will be wrapped in a namespace. Also in the namespace will be the name of the input file used to generate it and the length of the array data as an unsigned int.
 
